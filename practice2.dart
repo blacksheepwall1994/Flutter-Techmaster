@@ -24,5 +24,5 @@ void main(List<String> args) {
       "${arr[11]["flutter"][0].toString().toUpperCase()}${arr[11]["flutter"].toString().substring(1)}${arr[8][10.2]}";
   String s3 = arr[8][false].toString().toUpperCase();
   print(
-      '"$s1 ${arr[5]} ${arr[4]} ${arr[9][1]} ${arr[8][true]} ${arr[8][1]} ${arr[9][0]} ${arr[1]} ${arr[9][2]} $s2 $s3"'); // sẽ in ra "Đây" các ký tự sau tương tự như vậy.
+      '"$s1 ${arr[5]} ${arr[4]} ${arr[9][1]} ${arr[8][true]} ${arr[8][1]} ${arr[9][0]} ${arr[1]} ${arr[9][2]} $s2 $s3 ${arr[10]}"'); // sẽ in ra "Đây" các ký tự sau tương tự như vậy.
 }
