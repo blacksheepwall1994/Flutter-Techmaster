@@ -10,20 +10,18 @@ bool snt(int n) {
 }
 
 void main(List<String> args) {
-  int a = 20;
-  List b = [];
-  for (int i = 0; i <= 20; i++) {
-    if (snt(i)) {
-      b.add(i);
+  print(20.primeNumbers());
+  print(100.primeNumbers());
+}
+
+extension arr on int {
+  List primeNumbers() {
+    List d = [];
+    for (int i = 0; i <= this; i++) {
+      if (snt(i)) {
+        d.add(i);
+      }
     }
+    return d;
   }
-  print(b);
-  int c = 20;
-  List d = [];
-  for (int i = 0; i <= 100; i++) {
-    if (snt(i)) {
-      d.add(i);
-    }
-  }
-  print(d);
 }
