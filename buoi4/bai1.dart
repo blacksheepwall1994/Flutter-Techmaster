@@ -1,12 +1,67 @@
 import 'dart:math';
 
-class Flutter implements buildAndroid, buildIos, buildWeb, buildDesktop {
-  String className = 'Flutter';
-  int numberStudent = 11;
-  int get getNumber => numberStudent;
-  List<String>? studentName;
-  int get getStudentLength => studentName!.length;
-  Flutter({this.studentName});
+var buoiHocChung;
+var index;
+Map lopMp = {};
+
+class lophoc {
+  String className;
+  int studentNumber;
+  List<String> studentName = [];
+  int buoiHoc;
+  // int get getStudentLength => studentName.length;
+  lophoc(
+      {required this.className,
+      required this.studentNumber,
+      required this.studentName,
+      required this.buoiHoc});
+  int remainStudent() {
+    return studentNumber - studentName.length;
+  }
+
+  void addStudent(String name) {
+    studentName.add(name);
+  }
+
+  void doiBuoiHoc(int buoi) {
+    buoiHoc = buoi;
+    lopMp[className] = buoiHoc;
+
+    // switch (className.toString()) {
+    //   case "Flutter":
+    //     print("Abc");
+    //     index = 0;
+    //     buoiHocChung[0] = buoi;
+    //     break;
+    //   case "Android":
+    //     buoiHocChung[1] = buoi;
+    //     index = 1;
+    //     break;
+    //   case "IOS":
+    //     buoiHocChung[2] = buoi;
+    //     index = 2;
+    //     break;
+    //   case "Web":
+    //     buoiHocChung[3] = buoi;
+    //     index = 3;
+    //     break;
+    // }
+
+    //updateBuoiHoc();
+  }
+}
+
+class Flutter extends lophoc
+    with buildAndroid, buildIos, buildWeb, buildDesktop {
+  Flutter(
+      {required super.className,
+      required super.studentNumber,
+      required super.studentName,
+      required super.buoiHoc});
+  // : super(
+  //       className: className,
+  //       studentNumber: studentNumber,
+  //       studentName: studentName);
 
   @override
   void android() {
@@ -29,13 +84,16 @@ class Flutter implements buildAndroid, buildIos, buildWeb, buildDesktop {
   }
 }
 
-class Android implements buildAndroid {
-  String className = 'android';
-  int numberStudent = 12;
-  int get getNumber => numberStudent;
-  List<String>? studentName;
-  int get getStudentLength => studentName!.length;
-  Android({this.studentName});
+class Android extends lophoc with buildAndroid {
+  Android(
+      {required super.className,
+      required super.studentNumber,
+      required super.studentName,
+      required super.buoiHoc});
+  // : super(
+  //       className: className,
+  //       studentNumber: studentNumber,
+  //       studentName: studentName);
 
   @override
   void android() {
@@ -43,13 +101,16 @@ class Android implements buildAndroid {
   }
 }
 
-class Ios implements buildIos {
-  String className = 'ios';
-  int numberStudent = 13;
-  int get getNumber => numberStudent;
-  List<String>? studentName;
-  int get getStudentLength => studentName!.length;
-  Ios({this.studentName});
+class Ios extends lophoc with buildIos {
+  Ios(
+      {required super.className,
+      required super.studentNumber,
+      required super.studentName,
+      required super.buoiHoc});
+  // : super(
+  //       className: className,
+  //       studentNumber: studentNumber,
+  //       studentName: studentName);
 
   @override
   void ios() {
@@ -57,13 +118,17 @@ class Ios implements buildIos {
   }
 }
 
-class Web implements buildWeb {
-  String className = 'web';
-  int numberStudent = 14;
-  int get getNumber => numberStudent;
-  List<String>? studentName;
-  int get getStudentLength => studentName!.length;
-  Web({this.studentName});
+class Web extends lophoc with buildWeb {
+  Web(
+      {required className,
+      required studentNumber,
+      required studentName,
+      required buoiHoc})
+      : super(
+            className: className,
+            studentNumber: studentNumber,
+            studentName: studentName,
+            buoiHoc: buoiHoc);
 
   @override
   void web() {
@@ -71,84 +136,152 @@ class Web implements buildWeb {
   }
 }
 
-abstract class buildAndroid {
+mixin buildAndroid {
   void android();
 }
 
-abstract class buildIos {
+mixin buildIos {
   void ios();
 }
 
-abstract class buildWeb {
+mixin buildWeb {
   void web();
 }
 
-abstract class buildDesktop {
+mixin buildDesktop {
   void desktop();
 }
 
-extension calculate on int {
-  int remainMembers(int a) {
-    return this - a;
+void updateBuoiHoc(lophoc lop) {
+  if (lopMp.containsKey("Flutter")) {
+    int giatri = lopMp["Flutter"];
+    switch (lop.className) {
+      case "Flutter":
+        lop.buoiHoc = giatri;
+        break;
+      case "Android":
+        lop.buoiHoc = giatri + 7;
+        break;
+      case "Ios":
+        lop.buoiHoc = giatri + 8;
+        break;
+      case "Web":
+        lop.buoiHoc = giatri - 2;
+        break;
+    }
+  } else if (lopMp.containsKey("Android")) {
+    int giatri = lopMp["Android"];
+    switch (lop.className) {
+      case "Flutter":
+        lop.buoiHoc = giatri - 2;
+        break;
+      case "Android":
+        lop.buoiHoc = giatri;
+        break;
+      case "Ios":
+        lop.buoiHoc = giatri + 7;
+        break;
+      case "Web":
+        lop.buoiHoc = giatri + 8;
+        break;
+    }
+  } else if (lopMp.containsKey("Ios")) {
+    int giatri = lopMp["Ios"];
+    switch (lop.className) {
+      case "Flutter":
+        lop.buoiHoc = giatri + 7;
+        break;
+      case "Android":
+        lop.buoiHoc = giatri + 8;
+        break;
+      case "Ios":
+        lop.buoiHoc = giatri;
+        break;
+      case "Web":
+        lop.buoiHoc = giatri - 2;
+        break;
+    }
+  } else if (lopMp.containsKey("Web")) {
+    int giatri = lopMp["Web"];
+    switch (lop.className) {
+      case "Flutter":
+        lop.buoiHoc = giatri + 8;
+        break;
+      case "Android":
+        lop.buoiHoc = giatri - 2;
+        break;
+      case "Ios":
+        lop.buoiHoc = giatri - 2;
+        break;
+      case "Web":
+        lop.buoiHoc = giatri;
+        break;
+    }
+  }
+}
+
+dynamic addMoreStudent(int remain, lophoc lop) {
+  for (int i = 0; i < remain; i++) {
+    int rd = Random().nextInt(25);
+    String char = String.fromCharCode(rd + 65);
+    while (lop.studentName.contains(char)) {
+      rd = Random().nextInt(25);
+      char = String.fromCharCode(rd + 65);
+    }
+    lop.addStudent(char);
   }
 }
 
 void main(List<String> args) {
+  //var index;
   //bài 2
-  var flutter = Flutter(studentName: ["A", "B"]);
-  var android = Android(studentName: ["B", "C", "D"]);
-  var ios = Ios(studentName: ["D", "E", "F"]);
-  var web = Web(studentName: ["F"]);
+  var flutter = Flutter(
+      className: "Flutter",
+      studentNumber: 11,
+      studentName: ["A", "B"],
+      buoiHoc: 10);
+  var android = Android(
+      className: 'Android',
+      studentName: ["B", "C"],
+      studentNumber: 12,
+      buoiHoc: 10);
+  var ios = Ios(
+      className: 'Ios',
+      studentName: ["D", "E", "F"],
+      studentNumber: 13,
+      buoiHoc: 10);
+  var web =
+      Web(className: 'Web', studentName: ["F"], studentNumber: 14, buoiHoc: 10);
 
-  int rmFt = flutter.getNumber.remainMembers(flutter.getStudentLength);
-  int rmAd = android.getNumber.remainMembers(android.getStudentLength);
-  int rmIos = ios.getNumber.remainMembers(ios.getStudentLength);
-  int rmWeb = web.getNumber.remainMembers(web.getStudentLength);
+  int rmFt = flutter.remainStudent();
+  int rmAd = android.remainStudent();
+  int rmIos = ios.remainStudent();
+  int rmWeb = web.remainStudent();
+
   print("remainFlutter -> ${rmFt}");
   print("remainAndroid -> ${rmAd}");
   print("remainIos -> ${rmIos}");
   print("remainWeb -> ${rmWeb}");
 
+  //flutter.addStudent("quacquac");
+
   //bài 3
-  for (int i = 0; i < rmFt; i++) {
-    int rd = Random().nextInt(25);
-    String char = String.fromCharCode(rd + 65);
-    //print(flutter.studentName!.contains("P"));
-    while (flutter.studentName!.contains(char)) {
-      rd = Random().nextInt(25);
-      char = String.fromCharCode(rd + 65);
-    }
-    flutter.studentName!.add(char);
-  }
+  addMoreStudent(rmFt, flutter);
+  addMoreStudent(rmAd, android);
+  addMoreStudent(rmIos, ios);
+  addMoreStudent(rmWeb, web);
   print("flutter -> ${flutter.studentName}");
-  for (int i = 0; i < rmAd; i++) {
-    int rd = Random().nextInt(25);
-    String char = String.fromCharCode(rd + 65);
-    while (android.studentName!.contains(char)) {
-      rd = Random().nextInt(25);
-      char = String.fromCharCode(rd + 65);
-    }
-    android.studentName!.add(char);
-  }
   print("Android -> ${android.studentName}");
-  for (int i = 0; i < rmIos; i++) {
-    int rd = Random().nextInt(25);
-    String char = String.fromCharCode(rd + 65);
-    while (ios.studentName!.contains(char)) {
-      rd = Random().nextInt(25);
-      char = String.fromCharCode(rd + 65);
-    }
-    ios.studentName!.add(char);
-  }
   print("Ios -> ${ios.studentName}");
-  for (int i = 0; i < rmWeb; i++) {
-    int rd = Random().nextInt(25);
-    String char = String.fromCharCode(rd + 65);
-    while (web.studentName!.contains(char)) {
-      rd = Random().nextInt(25);
-      char = String.fromCharCode(rd + 65);
-    }
-    web.studentName!.add(char);
-  }
   print("Web -> ${web.studentName}");
+
+  //bai4
+  flutter.doiBuoiHoc(12);
+  //em chưa biết cách sao để check nếu giá trị này thay đổi thì mấy cái khác thay đổi ạ
+  //em làm theo cách if else đến chết thôi ạ :((
+  updateBuoiHoc(android);
+  updateBuoiHoc(ios);
+  updateBuoiHoc(web);
+  print(
+      "${flutter.buoiHoc},${android.buoiHoc}, ${ios.buoiHoc}, ${web.buoiHoc}");
 }
