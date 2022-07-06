@@ -15,6 +15,12 @@ class lophoc {
       required this.studentNumber,
       required this.studentName,
       required this.buoiHoc});
+  Map<String, dynamic> toMap() => {
+        'className': className,
+        'studentNumber': studentNumber,
+        'studentName': studentName,
+        'buoiHoc': buoiHoc,
+      };
   int remainStudent() {
     return studentNumber - studentName.length;
   }
@@ -26,28 +32,6 @@ class lophoc {
   void doiBuoiHoc(int buoi) {
     buoiHoc = buoi;
     lopMp[className] = buoiHoc;
-
-    // switch (className.toString()) {
-    //   case "Flutter":
-    //     print("Abc");
-    //     index = 0;
-    //     buoiHocChung[0] = buoi;
-    //     break;
-    //   case "Android":
-    //     buoiHocChung[1] = buoi;
-    //     index = 1;
-    //     break;
-    //   case "IOS":
-    //     buoiHocChung[2] = buoi;
-    //     index = 2;
-    //     break;
-    //   case "Web":
-    //     buoiHocChung[3] = buoi;
-    //     index = 3;
-    //     break;
-    // }
-
-    //updateBuoiHoc();
   }
 }
 
@@ -152,7 +136,9 @@ mixin buildDesktop {
   void desktop();
 }
 
-void updateBuoiHoc(lophoc lop) {
+typedef VoidCallback = void Function();
+
+updateBuoiHoc(lophoc lop) {
   if (lopMp.containsKey("Flutter")) {
     int giatri = lopMp["Flutter"];
     switch (lop.className) {
@@ -276,12 +262,15 @@ void main(List<String> args) {
   print("Web -> ${web.studentName}");
 
   //bai4
-  flutter.doiBuoiHoc(12);
+  Map<String, dynamic> flutterObj = flutter.toMap();
+  flutterObj["studentNumber"] = 13;
+  print("${flutterObj["studentNumber"]}, ${flutter.studentNumber}");
+  //flutter.doiBuoiHoc(12);
   //em chưa biết cách sao để check nếu giá trị này thay đổi thì mấy cái khác thay đổi ạ
   //em làm theo cách if else đến chết thôi ạ :((
-  updateBuoiHoc(android);
-  updateBuoiHoc(ios);
-  updateBuoiHoc(web);
-  print(
-      "${flutter.buoiHoc},${android.buoiHoc}, ${ios.buoiHoc}, ${web.buoiHoc}");
+  // updateBuoiHoc(android);
+  // updateBuoiHoc(ios);
+  // updateBuoiHoc(web);
+  // print(
+  //     "${flutter.buoiHoc},${android.buoiHoc}, ${ios.buoiHoc}, ${web.buoiHoc}");
 }
