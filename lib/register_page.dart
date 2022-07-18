@@ -90,7 +90,8 @@ class _RegisterState extends State<Register> {
                             Expanded(
                               child: ElevatedButton(
                                 style: ElevatedButton.styleFrom(
-                                    primary: Color.fromARGB(255, 5, 95, 33)),
+                                    primary:
+                                        const Color.fromARGB(255, 5, 95, 33)),
                                 onPressed: () {},
                                 child: const Text(
                                   "Đăng Ký",

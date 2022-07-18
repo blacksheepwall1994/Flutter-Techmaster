@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:t2/chess.dart';
 import 'package:t2/login_page.dart';
+import 'cards.dart';
 
 void main() {
   runApp(const MyApp());
@@ -18,7 +19,8 @@ class MyApp extends StatelessWidget {
         primarySwatch: Colors.blue,
       ),
       // home: const LoginPage(),
-      home: const Chess(),
+      // home: const Chess(),
+      home: const CardS(),
     );
   }
 }

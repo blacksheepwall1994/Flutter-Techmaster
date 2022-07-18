@@ -67,12 +67,12 @@ class _LoginPageState extends State<LoginPage> {
                             ),
                           );
                         },
-                        child: Text('Đăng Ký'),
+                        child: const Text('Đăng Ký'),
                       )),
                       Expanded(
                         child: ElevatedButton(
                           style: ElevatedButton.styleFrom(
-                              primary: Color.fromARGB(255, 5, 95, 33)),
+                              primary: const Color.fromARGB(255, 5, 95, 33)),
                           onPressed: () {},
                           child: const Text(
                             "Đăng Nhập",

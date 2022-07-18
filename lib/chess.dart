@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'chess_data.dart';
 
 class Chess extends StatefulWidget {
   const Chess({Key? key}) : super(key: key);
@@ -8,27 +9,16 @@ class Chess extends StatefulWidget {
 }
 
 class _ChessState extends State<Chess> {
-  bool colorPicker(index) {
-    int count = 0;
-    if (index % 2 == 0) {
-      count++;
-      if (count == 7) {
-        return true;
-      } else {
-        return false;
-      }
-    } else {
-      return false;
-    }
-  }
-
+  var abc = [
+    [1, 0, 1, 0, 1, 0, 1, 0],
+    [0, 1, 0, 1, 0, 1, 0, 1]
+  ];
   Widget buidItem(index) {
-    // print(index);
     return Container(
       decoration: BoxDecoration(
           // borderRadius: BorderRadius.circular(20),
-          color: colorPicker(index) ? Colors.black : Colors.white),
-      child: Text(index.toString()),
+          // color: board[index] ? Colors.black : Colors.white),
+          color: (index + index ~/ 8) % 2 == 0 ? Colors.black : Colors.white),
     );
   }
 
@@ -42,8 +32,6 @@ class _ChessState extends State<Chess> {
           itemCount: 64,
           gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
             crossAxisCount: 8,
-            mainAxisSpacing: 8,
-            crossAxisSpacing: 8,
             childAspectRatio: 1,
           )),
     );
@@ -53,7 +41,7 @@ class _ChessState extends State<Chess> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Title'),
+        title: const Text('Chess'),
       ),
       backgroundColor: Colors.blue,
       body: buildGrid(),
